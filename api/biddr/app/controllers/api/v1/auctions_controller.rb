@@ -1,4 +1,6 @@
 class Api::V1::AuctionsController < ApplicationController
+  before_action :authenticate_api_user, only: [:create, :update,:destroy]
+
   def index
     auctions = Auction.order(created_at: :desc).limit(25)
     render json: auctions
@@ -7,7 +9,7 @@ class Api::V1::AuctionsController < ApplicationController
   def create
 
     auction = Auction.new( auction_params)
-    auction.user = User.first
+    auction.user = current_user
     if auction.save
       render json: auction
     else
