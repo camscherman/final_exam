@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :auctions, only: [:create, :update, :index, :destroy, :show] do
         resources :bids, shallow: true, only: [:create, :destroy]
       end
+      resources :tokens, only: [:create]
     end
   end
 end
