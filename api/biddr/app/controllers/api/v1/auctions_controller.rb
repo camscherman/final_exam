@@ -9,10 +9,13 @@ class Api::V1::AuctionsController < ApplicationController
   def create
 
     auction = Auction.new( auction_params)
+    puts auction
     auction.user = current_user
+
     if auction.save
       render json: auction
     else
+
       render json: {error: auction.errors.full_messages}
     end
   end

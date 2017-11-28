@@ -9,5 +9,5 @@ class User < ApplicationRecord
 
   has_many :auctionbids, through: :bids, source: :auction
 
-  has_many :auctions
+  has_many :auctions, dependent: :destroy
 end
